@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins&display=swap');
 
 body {
     margin: 0;
@@ -14,14 +14,14 @@ body {
     background: #0f0f0f;
 }
 
-/* Fundal animat rosu neon */
+/* Fundal animat cu puncte */
 .animated-bg {
     position: absolute;
     top: 0;
     left: 0;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, #ff0000 1px, transparent 1px);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #ff4757 1px, transparent 1px);
     background-size: 50px 50px;
     animation: move-bg 20s linear infinite;
     z-index: 0;
@@ -33,22 +33,6 @@ body {
     100% { background-position: 1000px 1000px; }
 }
 
-/* Header */
-header {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    text-align: left;
-    padding: 20px 40px;
-}
-
-header h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2em;
-    color: #ff0000;
-    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000;
-}
-
 /* Container principal */
 .container {
     position: relative;
@@ -56,24 +40,24 @@ header h1 {
     text-align: center;
     padding: 30px;
     width: 100%;
+    max-width: 500px;
 }
 
-/* Titlu neon */
+/* Titlu neon roșu */
 h1 {
     font-family: 'Orbitron', sans-serif;
     font-size: 3em;
     color: #ff0000;
     text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
-/* Card neon */
+/* Carduri */
 .card {
     background: rgba(34, 34, 34, 0.9);
     border-radius: 15px;
     padding: 20px;
     margin: 15px auto;
-    width: 300px;
     box-shadow: 0 0 20px #ff0000;
     transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -83,12 +67,11 @@ h1 {
     box-shadow: 0 0 30px #ff0000, 0 0 60px #ff0000;
 }
 
-/* Info in card */
 .info h2 {
     margin: 0 0 10px 0;
     font-size: 1.5em;
-    color: #ff6b81;
-    text-shadow: 0 0 5px #ff6b81, 0 0 10px #ff6b81, 0 0 20px #ff6b81;
+    color: #ff4757;
+    text-shadow: 0 0 5px #ff4757, 0 0 10px #ff4757, 0 0 20px #ff4757;
 }
 
 .info p {
@@ -102,59 +85,81 @@ h1 {
     font-size: 0.9em;
     color: #ff00ff;
     text-shadow: 0 0 3px #ff00ff, 0 0 7px #ff00ff, 0 0 15px #ff00ff;
-    margin-top: 5px;
 }
 
-/* Buton */
+/* Buton download */
 .download-btn {
     display: inline-block;
     padding: 10px 25px;
     font-size: 1em;
     color: #fff;
-    background: #ff0000;
+    background: #ff4757;
     border-radius: 8px;
     text-decoration: none;
     transition: 0.3s;
-    cursor: pointer;
-    box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+    box-shadow: 0 0 10px #ff4757, 0 0 20px #ff4757;
+    margin-top: 10px;
 }
 
 .download-btn:hover {
-    background: #ff4c4c;
+    background: #ff6b81;
     transform: scale(1.05);
-    box-shadow: 0 0 20px #ff4c4c, 0 0 40px #ff4c4c;
+    box-shadow: 0 0 20px #ff6b81, 0 0 40px #ff6b81;
 }
 
-/* Commands panel */
-.commands-panel {
+/* Commands button */
+.commands-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 25px;
+    background: #ff4757;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #ff4757, 0 0 20px #ff4757;
+    transition: 0.3s;
+}
+
+.commands-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #ff6b81, 0 0 40px #ff6b81;
+}
+
+/* Commands container */
+.commands-container {
     display: none;
-    margin-top: 15px;
+    margin-top: 20px;
     background: rgba(34,34,34,0.9);
-    border-radius: 10px;
+    border-radius: 15px;
     padding: 15px;
     text-align: left;
-    box-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000;
 }
 
-.commands-panel input {
+.commands-container input {
     width: 100%;
-    padding: 8px;
-    border-radius: 5px;
+    padding: 10px;
+    border-radius: 8px;
     border: none;
     margin-bottom: 10px;
+    font-size: 1em;
 }
 
-.commands-panel ul {
+.commands-container ul {
     list-style: none;
     padding: 0;
-    margin: 0;
     max-height: 200px;
     overflow-y: auto;
 }
 
-.commands-panel li {
-    padding: 5px 0;
-    border-bottom: 1px solid rgba(255,0,0,0.2);
-    color: #fff;
-    text-shadow: 0 0 3px #ff0000;
+.commands-container li {
+    padding: 8px 5px;
+    margin: 5px 0;
+    background: #222;
+    border-radius: 5px;
+    cursor: default;
+    text-shadow: 0 0 2px #fff;
+}
+
+.commands-container li:hover {
+    background: #333;
+    box-shadow: 0 0 5px #ff4757;
 }
