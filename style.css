@@ -85,6 +85,17 @@ h1 {
     text-shadow: 0 0 2px #fff, 0 0 5px #fff;
 }
 
+/* Neon pentru owners */
+.owners {
+    font-size: 0.9em;
+    color: #ff00ff; /* neon magenta */
+    text-shadow:
+        0 0 3px #ff00ff,
+        0 0 7px #ff00ff,
+        0 0 15px #ff00ff;
+    margin-top: 5px;
+}
+
 /* Buton neon */
 .download-btn {
     display: inline-block;
