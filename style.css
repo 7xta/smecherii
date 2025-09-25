@@ -1,158 +1,66 @@
-\@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+\<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smecherii</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="animated-bg"></div>
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    height: 100vh;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    overflow: hidden;
-    position: relative;
-    background: linear-gradient(135deg, #b19cd9, #f0f0f0); /* platinum / mov spre alb */
+<header>
+    <h1>&gt;_ Commands</h1>
+</header>
+
+<div class="container">
+    <h1>$mecherii</h1>
+    <p>Download best $script</p>
+
+    <div class="card">
+        <div class="info">
+            <h2>Velox Spammer v2</h2>
+            <p>Version 3.11 - added: startfile delay</p>
+            <p class="owners">Owners: Velox&LyS</p>
+        </div>
+        <button class="download-btn" onclick="toggleCommands()">Commands</button>
+        <div class="commands-panel" id="commandsPanel">
+            <input type="text" id="commandSearch" placeholder="Search commands..." onkeyup="searchCommands()">
+            <ul id="commandsList">
+                <li>uptime</li>
+                <li>av</li>
+                <li>serverbanner</li>
+                <li>iplookup</li>
+                <li>serverav</li>
+                <li>stream</li>
+                <li>stopstream</li>
+                <li>massreact</li>
+                <li>reeact</li>
+                <li>delay</li>
+                <li>startfile</li>
+            </ul>
+        </div>
+        <a class="download-btn" href="https://drive.google.com/drive/folders/1ydxdnz4g2ere5eTOxP6DunslEbaXJ4EM?usp=drive_link" target="_blank">Download</a>
+    </div>
+</div>
+
+<script>
+function toggleCommands() {
+    const panel = document.getElementById('commandsPanel');
+    panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
 }
 
-/* Fundal animat */
-.animated-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px);
-    background-size: 50px 50px;
-    animation: move-bg 30s linear infinite;
-    z-index: 0;
-    opacity: 0.15;
-}
+function searchCommands() {
+    const input = document.getElementById('commandSearch');
+    const filter = input.value.toLowerCase();
+    const ul = document.getElementById('commandsList');
+    const li = ul.getElementsByTagName('li');
 
-@keyframes move-bg {
-    0% { background-position: 0 0; }
-    100% { background-position: 1000px 1000px; }
+    for (let i = 0; i < li.length; i++) {
+        let txtValue = li[i].textContent || li[i].innerText;
+        li[i].style.display = txtValue.toLowerCase().includes(filter) ? "" : "none";
+    }
 }
-
-/* Header */
-header {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    text-align: left;
-    padding: 20px 40px;
-}
-
-header h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2em;
-    color: #7f00ff;
-    text-shadow: 0 0 5px #7f00ff, 0 0 10px #7f00ff, 0 0 20px #7f00ff;
-}
-
-/* Container principal */
-.container {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 30px;
-    width: 100%;
-}
-
-/* Titlu neon */
-h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 3em;
-    color: #ff00ff;
-    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff;
-    margin-bottom: 30px;
-}
-
-/* Card neon */
-.card {
-    background: rgba(34, 34, 34, 0.9);
-    border-radius: 15px;
-    padding: 20px;
-    margin: 15px auto;
-    width: 300px;
-    box-shadow: 0 0 20px #7f00ff;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px #7f00ff, 0 0 60px #7f00ff;
-}
-
-/* Info in card */
-.info h2 {
-    margin: 0 0 10px 0;
-    font-size: 1.5em;
-    color: #00ffff;
-    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
-}
-
-.info p {
-    margin: 0 0 10px 0;
-    font-size: 1em;
-    color: #fff;
-    text-shadow: 0 0 2px #fff, 0 0 5px #fff;
-}
-
-.owners {
-    font-size: 0.9em;
-    color: #ff00ff;
-    text-shadow: 0 0 3px #ff00ff, 0 0 7px #ff00ff, 0 0 15px #ff00ff;
-    margin-top: 5px;
-}
-
-/* Buton */
-.download-btn {
-    display: inline-block;
-    padding: 10px 25px;
-    font-size: 1em;
-    color: #fff;
-    background: #7f00ff;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: 0.3s;
-    cursor: pointer;
-    box-shadow: 0 0 10px #7f00ff, 0 0 20px #7f00ff;
-}
-
-.download-btn:hover {
-    background: #a64dff;
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #a64dff, 0 0 40px #a64dff;
-}
-
-/* Commands panel */
-.commands-panel {
-    display: none;
-    margin-top: 15px;
-    background: rgba(0,0,0,0.85);
-    border-radius: 10px;
-    padding: 15px;
-    text-align: left;
-}
-
-.commands-panel input {
-    width: 100%;
-    padding: 8px;
-    border-radius: 5px;
-    border: none;
-    margin-bottom: 10px;
-}
-
-.commands-panel ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-.commands-panel li {
-    padding: 5px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    color: #fff;
-}
+</script>
+</body>
+</html>
