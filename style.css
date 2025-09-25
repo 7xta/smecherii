@@ -31,39 +31,18 @@ p {
     margin-bottom: 30px;
 }
 
-button {
+.download-btn {
     padding: 15px 40px;
     font-size: 1.2em;
     color: #fff;
     background: #ff4757;
     border: none;
     border-radius: 10px;
-    cursor: pointer;
+    text-decoration: none;
     transition: 0.3s;
 }
 
-button:hover {
+.download-btn:hover {
     background: #ff6b81;
     transform: scale(1.05);
-}
-
-ul {
-    margin-top: 20px;
-    list-style: none;
-    padding: 0;
-}
-
-li a {
-    display: inline-block;
-    margin: 5px;
-    padding: 10px 20px;
-    color: #fff;
-    background: #2f3542;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: 0.3s;
-}
-
-li a:hover {
-    background: #ff4757;
 }
