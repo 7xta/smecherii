@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Orbitron', sans-serif; /* font futurist / neon */
+    font-family: 'Poppins', sans-serif;
     height: 100vh;
     color: #fff;
     display: flex;
@@ -41,9 +41,8 @@ body {
 
 h1 {
     font-size: 3em;
-    color: #ff00ff;
+    color: #ff4757;
     margin-bottom: 30px;
-    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff;
 }
 
 .card {
@@ -52,27 +51,25 @@ h1 {
     padding: 20px;
     margin: 15px auto;
     width: 300px;
-    box-shadow: 0 0 20px #ff00ff;
+    box-shadow: 0 0 20px rgba(255, 71, 87, 0.4);
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .card:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 30px #ff00ff, 0 0 60px #ff00ff;
+    box-shadow: 0 0 30px rgba(255, 71, 87, 0.7);
 }
 
 .info h2 {
     margin: 0 0 10px 0;
     font-size: 1.5em;
-    color: #00ffff;
-    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
+    color: #ff4757;
 }
 
 .info p {
     margin: 0 0 15px 0;
     font-size: 1em;
     color: #fff;
-    text-shadow: 0 0 2px #fff, 0 0 5px #fff;
 }
 
 .download-btn {
@@ -80,15 +77,13 @@ h1 {
     padding: 10px 25px;
     font-size: 1em;
     color: #fff;
-    background: #ff00ff;
+    background: #ff4757;
     border-radius: 8px;
     text-decoration: none;
     transition: 0.3s;
-    box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
 }
 
 .download-btn:hover {
-    background: #ff6bff;
+    background: #ff6b81;
     transform: scale(1.05);
-    box-shadow: 0 0 20px #ff6bff, 0 0 40px #ff6bff;
 }
