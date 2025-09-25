@@ -43,7 +43,7 @@ body {
     max-width: 500px;
 }
 
-/* Commands minimalist deasupra */
+/* Buton minimalist Commands neon negru */
 .commands-btn {
     font-family: 'Orbitron', sans-serif;
     font-size: 2em;
@@ -52,6 +52,19 @@ body {
     text-shadow: 0 0 5px #ff4757, 0 0 10px #ff4757, 0 0 20px #ff4757;
     margin-bottom: 20px;
     display: inline-block;
+
+    background: #111; /* fundal negru */
+    padding: 10px 25px;
+    border-radius: 10px;
+    border: 2px solid #ff4757; /* margine neon */
+    box-shadow: 0 0 10px #ff4757, 0 0 20px #ff4757;
+    transition: 0.3s;
+}
+
+.commands-btn:hover {
+    color: #fff;
+    box-shadow: 0 0 20px #ff4757, 0 0 40px #ff4757, 0 0 60px #ff4757;
+    transform: scale(1.1);
 }
 
 /* Titlu neon roșu */
