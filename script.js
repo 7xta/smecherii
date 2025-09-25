@@ -5,7 +5,7 @@ fetch('files.json')
     const btn = document.getElementById('download-velox-spammer-v2');
     const fileList = document.getElementById('file-list');
 
-    // Setăm butonul să deschidă link-ul folderului
+
     btn.addEventListener('click', () => {
         if (files.length > 0) {
             window.open(files[0].link, '_blank');
@@ -14,7 +14,7 @@ fetch('files.json')
         }
     });
 
-    // Optional: lista fișierelor din folder (dacă vrei să le afișezi individual)
+
     files.forEach(file => {
         const li = document.createElement('li');
         const a = document.createElement('a');
