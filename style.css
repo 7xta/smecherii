@@ -11,27 +11,26 @@ body {
     align-items: flex-start;
     overflow: hidden;
     position: relative;
-    background: #0a0a0a;
+    background: #0f0f0f;
 }
 
-/* Fundal animat linii neon ca Evict.bot */
+/* Fundal animat cu puncte */
 .animated-bg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, #ff1f7c 1px, transparent 1px), 
-                linear-gradient(-45deg, #ff1f7c 1px, transparent 1px);
-    background-size: 60px 60px;
-    animation: move-bg 15s linear infinite;
+    background: radial-gradient(circle, #ff4757 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: move-bg 20s linear infinite;
     z-index: 0;
-    opacity: 0.15;
+    opacity: 0.3;
 }
 
 @keyframes move-bg {
-    0% { background-position: 0 0, 0 0; }
-    100% { background-position: 1000px 1000px, -1000px -1000px; }
+    0% { background-position: 0 0; }
+    100% { background-position: 1000px 1000px; }
 }
 
 /* Container principal */
@@ -39,64 +38,64 @@ body {
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 50px 30px;
+    padding: 40px 30px;
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
 }
 
 /* Buton minimalist Commands neon negru */
 .commands-btn {
     font-family: 'Orbitron', sans-serif;
     font-size: 2em;
-    color: #ff1f7c;
+    color: #ff4757;
     cursor: pointer;
-    text-shadow: 0 0 5px #ff1f7c, 0 0 10px #ff1f7c, 0 0 20px #ff1f7c;
-    margin-bottom: 30px;
+    text-shadow: 0 0 5px #ff4757, 0 0 10px #ff4757, 0 0 20px #ff4757;
+    margin-bottom: 20px;
     display: inline-block;
 
     background: #111; /* fundal negru */
-    padding: 12px 30px;
-    border-radius: 12px;
-    border: 2px solid #ff1f7c; /* margine neon */
-    box-shadow: 0 0 15px #ff1f7c, 0 0 30px #ff1f7c;
+    padding: 10px 25px;
+    border-radius: 10px;
+    border: 2px solid #ff4757; /* margine neon */
+    box-shadow: 0 0 10px #ff4757, 0 0 20px #ff4757;
     transition: 0.3s;
 }
 
 .commands-btn:hover {
     color: #fff;
-    box-shadow: 0 0 25px #ff1f7c, 0 0 50px #ff1f7c, 0 0 70px #ff1f7c;
+    box-shadow: 0 0 20px #ff4757, 0 0 40px #ff4757, 0 0 60px #ff4757;
     transform: scale(1.1);
 }
 
-/* Titlu neon roșu/roz */
+/* Titlu neon roșu */
 h1 {
     font-family: 'Orbitron', sans-serif;
     font-size: 3em;
-    color: #ff1f7c;
-    text-shadow: 0 0 5px #ff1f7c, 0 0 10px #ff1f7c, 0 0 20px #ff1f7c, 0 0 40px #ff1f7c;
+    color: #ff0000;
+    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000;
     margin-bottom: 20px;
 }
 
 /* Carduri */
 .card {
-    background: rgba(20, 20, 20, 0.95);
-    border-radius: 18px;
-    padding: 25px;
-    margin: 25px auto;
-    box-shadow: 0 0 25px #ff1f7c;
+    background: rgba(34, 34, 34, 0.9);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 0 20px #ff0000;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .card:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 35px #ff1f7c, 0 0 70px #ff1f7c;
+    box-shadow: 0 0 30px #ff0000, 0 0 60px #ff0000;
 }
 
 .info h2 {
     margin: 0 0 10px 0;
     font-size: 1.5em;
-    color: #ff6ba1;
-    text-shadow: 0 0 5px #ff6ba1, 0 0 10px #ff6ba1, 0 0 20px #ff6ba1;
+    color: #ff4757;
+    text-shadow: 0 0 5px #ff4757, 0 0 10px #ff4757, 0 0 20px #ff4757;
 }
 
 .info p {
@@ -108,50 +107,50 @@ h1 {
 
 .owners {
     font-size: 0.9em;
-    color: #ff33aa;
-    text-shadow: 0 0 3px #ff33aa, 0 0 7px #ff33aa, 0 0 15px #ff33aa;
+    color: #ff00ff;
+    text-shadow: 0 0 3px #ff00ff, 0 0 7px #ff00ff, 0 0 15px #ff00ff;
 }
 
 /* Buton download */
 .download-btn {
     display: inline-block;
-    padding: 12px 30px;
+    padding: 10px 25px;
     font-size: 1em;
     color: #fff;
-    background: #ff1f7c;
-    border-radius: 10px;
+    background: #ff4757;
+    border-radius: 8px;
     text-decoration: none;
     transition: 0.3s;
-    box-shadow: 0 0 15px #ff1f7c, 0 0 30px #ff1f7c;
-    margin-top: 15px;
+    box-shadow: 0 0 10px #ff4757, 0 0 20px #ff4757;
+    margin-top: 10px;
 }
 
 .download-btn:hover {
-    background: #ff6ba1;
+    background: #ff6b81;
     transform: scale(1.05);
-    box-shadow: 0 0 25px #ff6ba1, 0 0 50px #ff6ba1;
+    box-shadow: 0 0 20px #ff6b81, 0 0 40px #ff6b81;
 }
 
-/* Commands container */
+/* Commands container cu mai mult spațiu */
 .commands-container {
     display: none;
-    margin-top: 30px;
-    background: rgba(30,30,30,0.95);
-    border-radius: 18px;
-    padding: 25px;
+    margin-top: 25px;
+    background: rgba(34,34,34,0.95);
+    border-radius: 15px;
+    padding: 20px;
     text-align: left;
 }
 
 .commands-container input {
     width: 100%;
-    padding: 14px;
-    border-radius: 10px;
+    padding: 12px;
+    border-radius: 8px;
     border: none;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-size: 1em;
     background: #222;
     color: #fff;
-    box-shadow: 0 0 5px #ff1f7c;
+    box-shadow: 0 0 5px #ff4757;
 }
 
 .commands-container ul {
@@ -162,10 +161,10 @@ h1 {
 }
 
 .commands-container li {
-    padding: 12px 10px;
-    margin: 7px 0;
+    padding: 10px 8px;
+    margin: 6px 0;
     background: #222;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: default;
     text-shadow: 0 0 2px #fff;
     font-size: 1em;
@@ -173,5 +172,5 @@ h1 {
 
 .commands-container li:hover {
     background: #333;
-    box-shadow: 0 0 8px #ff1f7c;
+    box-shadow: 0 0 5px #ff4757;
 }
