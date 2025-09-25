@@ -3,24 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>smecherii</title>
+<title>Smecherii</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="animated-bg"></div>
 
+<header>
+    <h1>&gt;_ Commands</h1>
+</header>
+
 <div class="container">
     <h1>$mecherii</h1>
-    <p>Download best $script </p>
+    <p>Download best $script</p>
 
     <div class="card">
         <div class="info">
             <h2>Velox Spammer v2</h2>
-            <p>Version 3.11 - added: startfile delay </p>
+            <p>Version 3.11 - added: startfile delay</p>
             <p class="owners">Owners: Velox&LyS</p>
+        </div>
+        <button class="download-btn" onclick="toggleCommands()">Commands</button>
+        <div class="commands-panel" id="commandsPanel">
+            <input type="text" id="commandSearch" placeholder="Search commands..." onkeyup="searchCommands()">
+            <ul id="commandsList">
+                <li>uptime</li>
+                <li>av</li>
+                <li>serverbanner</li>
+                <li>iplookup</li>
+                <li>serverav</li>
+                <li>stream</li>
+                <li>stopstream</li>
+                <li>massreact</li>
+                <li>reeact</li>
+                <li>delay</li>
+                <li>startfile</li>
+            </ul>
         </div>
         <a class="download-btn" href="https://drive.google.com/drive/folders/1ydxdnz4g2ere5eTOxP6DunslEbaXJ4EM?usp=drive_link" target="_blank">Download</a>
     </div>
 </div>
+
+<script>
+function toggleCommands() {
+    const panel = document.getElementById('commandsPanel');
+    panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+}
+
+function searchCommands() {
+    const input = document.getElementById('commandSearch');
+    const filter = input.value.toLowerCase();
+    const ul = document.getElementById('commandsList');
+    const li = ul.getElementsByTagName('li');
+
+    for (let i = 0; i < li.length; i++) {
+        let txtValue = li[i].textContent || li[i].innerText;
+        li[i].style.display = txtValue.toLowerCase().includes(filter) ? "" : "none";
+    }
+}
+</script>
 </body>
 </html>
