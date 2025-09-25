@@ -1,8 +1,8 @@
 fetch('files.json')
 .then(res => res.json())
 .then(data => {
-    const files = data["Smecherii"];
-    const btn = document.getElementById('download-folder');
+    const files = data["smecherii"];
+    const btn = document.getElementById('download-velox-spammer-v2');
     const fileList = document.getElementById('file-list');
 
     // Setăm butonul să deschidă link-ul folderului
