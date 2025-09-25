@@ -38,9 +38,20 @@ body {
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 30px;
+    padding: 40px 30px;
     width: 100%;
     max-width: 500px;
+}
+
+/* Commands minimalist deasupra */
+.commands-btn {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2em;
+    color: #ff4757;
+    cursor: pointer;
+    text-shadow: 0 0 5px #ff4757, 0 0 10px #ff4757, 0 0 20px #ff4757;
+    margin-bottom: 20px;
+    display: inline-block;
 }
 
 /* Titlu neon roșu */
@@ -57,7 +68,7 @@ h1 {
     background: rgba(34, 34, 34, 0.9);
     border-radius: 15px;
     padding: 20px;
-    margin: 15px auto;
+    margin: 20px auto;
     box-shadow: 0 0 20px #ff0000;
     transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -107,56 +118,43 @@ h1 {
     box-shadow: 0 0 20px #ff6b81, 0 0 40px #ff6b81;
 }
 
-/* Commands button */
-.commands-btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 25px;
-    background: #ff4757;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 0 10px #ff4757, 0 0 20px #ff4757;
-    transition: 0.3s;
-}
-
-.commands-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #ff6b81, 0 0 40px #ff6b81;
-}
-
-/* Commands container */
+/* Commands container cu mai mult spațiu */
 .commands-container {
     display: none;
-    margin-top: 20px;
-    background: rgba(34,34,34,0.9);
+    margin-top: 25px;
+    background: rgba(34,34,34,0.95);
     border-radius: 15px;
-    padding: 15px;
+    padding: 20px;
     text-align: left;
 }
 
 .commands-container input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border-radius: 8px;
     border: none;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-size: 1em;
+    background: #222;
+    color: #fff;
+    box-shadow: 0 0 5px #ff4757;
 }
 
 .commands-container ul {
     list-style: none;
     padding: 0;
-    max-height: 200px;
+    max-height: 250px;
     overflow-y: auto;
 }
 
 .commands-container li {
-    padding: 8px 5px;
-    margin: 5px 0;
+    padding: 10px 8px;
+    margin: 6px 0;
     background: #222;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: default;
     text-shadow: 0 0 2px #fff;
+    font-size: 1em;
 }
 
 .commands-container li:hover {
