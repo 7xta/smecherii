@@ -1,17 +1,28 @@
 fetch('files.json')
-    .then(response => response.json())
-    .then(data => {
-        const fileList = document.getElementById('file-list');
+.then(res => res.json())
+.then(data => {
+    const files = data["Smecherii"];
+    const btn = document.getElementById('download-folder');
+    const fileList = document.getElementById('file-list');
 
-        const files = data["script"];
-        const file = files[0]; 
+    // Setăm butonul să deschidă link-ul folderului
+    btn.addEventListener('click', () => {
+        if (files.length > 0) {
+            window.open(files[0].link, '_blank');
+        } else {
+            alert("No folder available!");
+        }
+    });
 
+    // Optional: lista fișierelor din folder (dacă vrei să le afișezi individual)
+    files.forEach(file => {
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.href = file.link;
         a.textContent = file.name;
-        a.setAttribute('download', '');
+        a.target = "_blank";
         li.appendChild(a);
         fileList.appendChild(li);
-    })
-    .catch(err => console.error('error while downloading:', err));
+    });
+})
+.catch(err => console.error('Error loading files.json:', err));
