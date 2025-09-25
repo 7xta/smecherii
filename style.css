@@ -136,7 +136,7 @@ h1 {
 .commands-container {
     display: none;
     margin-top: 25px;
-    background: rgba(34,34,34,0.95);
+    background: #111; /* negru pur */
     border-radius: 15px;
     padding: 20px;
     text-align: left;
@@ -149,9 +149,9 @@ h1 {
     border: none;
     margin-bottom: 15px;
     font-size: 1em;
-    background: #222;
+    background: #111; /* negru pur */
     color: #fff;
-    box-shadow: 0 0 5px #ff0000;
+    box-shadow: 0 0 10px #ff0000;
 }
 
 .commands-container ul {
@@ -159,13 +159,14 @@ h1 {
     padding: 0;
     max-height: 250px;
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch; /* scroll smooth pe mobil */
+    -webkit-overflow-scrolling: touch;
+    background: #111; /* negru pur */
 }
 
 .commands-container li {
     padding: 10px 8px;
     margin: 6px 0;
-    background: #222;
+    background: #111; /* negru pur */
     border-radius: 8px;
     cursor: default;
     text-shadow: 0 0 2px #fff;
@@ -173,7 +174,7 @@ h1 {
 }
 
 .commands-container li:hover {
-    background: #333;
+    background: #222;
     box-shadow: 0 0 5px #ff0000;
 }
 
