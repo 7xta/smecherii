@@ -4,12 +4,11 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    height: 100vh;
     color: #fff;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    overflow: hidden;
+    overflow-x: hidden;
     position: relative;
     background: #0f0f0f;
 }
@@ -38,8 +37,8 @@ body {
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 40px 30px;
-    width: 100%;
+    padding: 30px 20px;
+    width: 95%;
     max-width: 500px;
 }
 
@@ -53,10 +52,10 @@ body {
     margin-bottom: 20px;
     display: inline-block;
 
-    background: #111; /* fundal negru */
-    padding: 10px 25px;
+    background: #111;
+    padding: 10px 20px;
     border-radius: 10px;
-    border: 2px solid #ff4757; /* margine neon */
+    border: 2px solid #ff4757;
     box-shadow: 0 0 10px #ff4757, 0 0 20px #ff4757;
     transition: 0.3s;
 }
@@ -64,13 +63,13 @@ body {
 .commands-btn:hover {
     color: #fff;
     box-shadow: 0 0 20px #ff4757, 0 0 40px #ff4757, 0 0 60px #ff4757;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 /* Titlu neon roșu */
 h1 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 3em;
+    font-size: 2.5em;
     color: #ff0000;
     text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000;
     margin-bottom: 20px;
@@ -80,8 +79,8 @@ h1 {
 .card {
     background: rgba(34, 34, 34, 0.9);
     border-radius: 15px;
-    padding: 20px;
-    margin: 20px auto;
+    padding: 15px;
+    margin: 15px auto;
     box-shadow: 0 0 20px #ff0000;
     transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -93,20 +92,20 @@ h1 {
 
 .info h2 {
     margin: 0 0 10px 0;
-    font-size: 1.5em;
+    font-size: 1.3em;
     color: #ff4757;
     text-shadow: 0 0 5px #ff4757, 0 0 10px #ff4757, 0 0 20px #ff4757;
 }
 
 .info p {
     margin: 0 0 10px 0;
-    font-size: 1em;
+    font-size: 0.95em;
     color: #fff;
     text-shadow: 0 0 2px #fff, 0 0 5px #fff;
 }
 
 .owners {
-    font-size: 0.9em;
+    font-size: 0.85em;
     color: #ff00ff;
     text-shadow: 0 0 3px #ff00ff, 0 0 7px #ff00ff, 0 0 15px #ff00ff;
 }
@@ -114,7 +113,7 @@ h1 {
 /* Buton download */
 .download-btn {
     display: inline-block;
-    padding: 10px 25px;
+    padding: 10px 20px;
     font-size: 1em;
     color: #fff;
     background: #ff4757;
@@ -131,19 +130,19 @@ h1 {
     box-shadow: 0 0 20px #ff6b81, 0 0 40px #ff6b81;
 }
 
-/* Commands container cu mai mult spațiu */
+/* Commands container */
 .commands-container {
     display: none;
-    margin-top: 25px;
+    margin-top: 20px;
     background: rgba(34,34,34,0.95);
-    border-radius: 15px;
-    padding: 20px;
+    border-radius: 12px;
+    padding: 15px;
     text-align: left;
 }
 
 .commands-container input {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     border-radius: 8px;
     border: none;
     margin-bottom: 15px;
@@ -156,13 +155,14 @@ h1 {
 .commands-container ul {
     list-style: none;
     padding: 0;
-    max-height: 250px;
+    max-height: 200px;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* scroll smooth pe mobil */
 }
 
 .commands-container li {
-    padding: 10px 8px;
-    margin: 6px 0;
+    padding: 10px;
+    margin: 5px 0;
     background: #222;
     border-radius: 8px;
     cursor: default;
@@ -173,4 +173,15 @@ h1 {
 .commands-container li:hover {
     background: #333;
     box-shadow: 0 0 5px #ff4757;
+}
+
+/* Responsive mobil */
+@media screen and (max-width: 480px) {
+    h1 { font-size: 2em; }
+    .commands-btn { font-size: 1.8em; padding: 8px 20px; }
+    .card { padding: 12px; margin: 12px auto; }
+    .info h2 { font-size: 1.2em; }
+    .info p { font-size: 0.9em; }
+    .commands-container input { padding: 8px; font-size: 0.95em; }
+    .commands-container li { padding: 8px; font-size: 0.95em; }
 }
