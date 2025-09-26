@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    color: #fff;
+    color: #ddd; /* text mai soft decât alb */
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -48,46 +48,32 @@ body {
 .commands-btn {
     font-family: 'Orbitron', sans-serif;
     font-size: 2em;
-    color: #ff0000;
+    color: #ff5555; /* mai soft neon roșu */
     cursor: pointer;
-    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000;
+    text-shadow: 0 0 5px #ff5555, 0 0 10px #ff5555, 0 0 20px #ff5555;
     margin-bottom: 20px;
     display: inline-block;
-
     background: #111;
     padding: 10px 25px;
     border-radius: 10px;
-    border: 2px solid #ff0000;
-    box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+    border: 2px solid #ff5555;
+    box-shadow: 0 0 10px #ff5555, 0 0 20px #ff5555;
     transition: 0.3s;
 }
 
 .commands-btn:hover {
     color: #fff;
-    box-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000, 0 0 60px #ff0000;
+    box-shadow: 0 0 20px #ff5555, 0 0 40px #ff5555, 0 0 60px #ff5555;
     transform: scale(1.05);
 }
 
-/* Titlu neon roșu pulsant */
+/* Titlu neon roșu */
 h1 {
     font-family: 'Orbitron', sans-serif;
     font-size: 2.5em;
-    color: #ff0000;
-    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000;
+    color: #ff5555;
+    text-shadow: 0 0 5px #ff5555, 0 0 10px #ff5555, 0 0 20px #ff5555, 0 0 40px #ff5555;
     margin-bottom: 20px;
-    animation: neonPulse 1.8s infinite alternate;
-}
-
-@keyframes neonPulse {
-    0% {
-        text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000;
-    }
-    50% {
-        text-shadow: 0 0 10px #ff3333, 0 0 20px #ff3333, 0 0 30px #ff3333, 0 0 50px #ff3333;
-    }
-    100% {
-        text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000;
-    }
 }
 
 /* Carduri */
@@ -96,33 +82,33 @@ h1 {
     border-radius: 15px;
     padding: 20px;
     margin: 20px auto;
-    box-shadow: 0 0 20px #ff0000;
+    box-shadow: 0 0 20px #ff5555;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .card:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 30px #ff0000, 0 0 60px #ff0000;
+    box-shadow: 0 0 30px #ff5555, 0 0 60px #ff5555;
 }
 
 .info h2 {
     margin: 0 0 10px 0;
     font-size: 1.5em;
-    color: #ff0000;
-    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000;
+    color: #ff5555;
+    text-shadow: 0 0 5px #ff5555, 0 0 10px #ff5555, 0 0 20px #ff5555;
 }
 
 .info p {
     margin: 0 0 10px 0;
     font-size: 1em;
-    color: #fff;
-    text-shadow: 0 0 2px #fff, 0 0 5px #fff;
+    color: #ddd;
+    text-shadow: 0 0 2px #ccc, 0 0 5px #ccc;
 }
 
 .owners {
     font-size: 0.9em;
-    color: #ff0000;
-    text-shadow: 0 0 3px #ff0000, 0 0 7px #ff0000, 0 0 15px #ff0000;
+    color: #ff5555;
+    text-shadow: 0 0 3px #ff5555, 0 0 7px #ff5555, 0 0 15px #ff5555;
 }
 
 /* Buton download */
@@ -131,18 +117,18 @@ h1 {
     padding: 10px 25px;
     font-size: 1em;
     color: #fff;
-    background: #ff0000;
+    background: #ff5555;
     border-radius: 8px;
     text-decoration: none;
     transition: 0.3s;
-    box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+    box-shadow: 0 0 10px #ff5555, 0 0 20px #ff5555;
     margin-top: 10px;
 }
 
 .download-btn:hover {
-    background: #ff3333;
+    background: #ff7777;
     transform: scale(1.05);
-    box-shadow: 0 0 20px #ff3333, 0 0 40px #ff3333;
+    box-shadow: 0 0 20px #ff7777, 0 0 40px #ff7777;
 }
 
 /* Commands container */
@@ -163,8 +149,8 @@ h1 {
     margin-bottom: 15px;
     font-size: 1em;
     background: #111;
-    color: #fff;
-    box-shadow: 0 0 10px #ff0000;
+    color: #ddd; /* gri deschis */
+    box-shadow: 0 0 8px #ff5555;
 }
 
 .commands-container ul {
@@ -182,13 +168,14 @@ h1 {
     background: #111;
     border-radius: 8px;
     cursor: default;
-    text-shadow: 0 0 2px #fff;
+    text-shadow: 0 0 1px #ccc;
     font-size: 1em;
+    color: #ccc; /* gri deschis */
 }
 
 .commands-container li:hover {
     background: #222;
-    box-shadow: 0 0 5px #ff0000;
+    box-shadow: 0 0 5px #ff5555;
 }
 
 /* Responsive mobil */
