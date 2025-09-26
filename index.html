@@ -4,198 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>smecherii</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins&display=swap" rel="stylesheet">
-<style>
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    min-height: 100vh;
-    overflow-x: hidden;
-    position: relative;
-    background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-}
-
-/* Canvas doar pe desktop */
-#bgCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -2;
-    display: none; /* ascuns implicit */
-}
-
-/* Container principal */
-.container {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 30px 20px;
-    width: 95%;
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-/* Buton minimalist Commands neon */
-.commands-btn {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2em;
-    color: #ff0000;
-    cursor: pointer;
-    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000;
-    margin-bottom: 20px;
-    display: inline-block;
-    background: #111;
-    padding: 10px 25px;
-    border-radius: 10px;
-    border: 2px solid #ff0000;
-    box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
-    transition: 0.3s;
-}
-
-.commands-btn:hover {
-    color: #fff;
-    box-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000, 0 0 60px #ff0000;
-    transform: scale(1.05);
-}
-
-/* Titlu neon roșu pulsant */
-h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2.5em;
-    color: #ff0000;
-    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000;
-    margin-bottom: 20px;
-    animation: neonPulse 1.8s infinite alternate;
-}
-
-@keyframes neonPulse {
-    0% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000; }
-    100% { text-shadow: 0 0 15px #ff0000, 0 0 30px #ff0000, 0 0 50px #ff0000; }
-}
-
-/* Carduri */
-.card {
-    background: rgba(34, 34, 34, 0.9);
-    border-radius: 15px;
-    padding: 20px;
-    margin: 20px auto;
-    box-shadow: 0 0 20px #ff0000;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px #ff0000, 0 0 60px #ff0000;
-}
-
-.info h2 {
-    margin: 0 0 10px 0;
-    font-size: 1.5em;
-    color: #ff0000;
-    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000;
-}
-
-.info p {
-    margin: 0 0 10px 0;
-    font-size: 1em;
-    color: #fff;
-    text-shadow: 0 0 2px #fff, 0 0 5px #fff;
-}
-
-/* Buton download */
-.download-btn {
-    display: inline-block;
-    padding: 10px 25px;
-    font-size: 1em;
-    color: #fff;
-    background: #ff0000;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: 0.3s;
-    box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
-    margin-top: 10px;
-}
-
-.download-btn:hover {
-    background: #ff3333;
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #ff3333, 0 0 40px #ff3333;
-}
-
-/* Commands container */
-.commands-container {
-    display: none;
-    margin-top: 25px;
-    background: #111;
-    border-radius: 15px;
-    padding: 20px;
-    text-align: left;
-}
-
-.commands-container input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-    margin-bottom: 15px;
-    font-size: 1em;
-    background: #111;
-    color: #fff;
-    box-shadow: 0 0 10px #ff0000;
-}
-
-.commands-container ul {
-    list-style: none;
-    padding: 0;
-    max-height: 250px;
-    overflow-y: auto;
-    background: #111;
-}
-
-.commands-container li {
-    padding: 10px 8px;
-    margin: 6px 0;
-    background: #111;
-    border-radius: 8px;
-    cursor: default;
-    text-shadow: 0 0 2px #fff;
-    font-size: 1em;
-}
-
-.commands-container li:hover {
-    background: #222;
-    box-shadow: 0 0 5px #ff0000;
-}
-
-/* Responsive mobil/tablet */
-@media screen and (max-width: 768px) {
-    h1 { font-size: 2em; }
-    .commands-btn { font-size: 1.8em; padding: 8px 20px; }
-    .card { padding: 12px; margin: 12px auto; }
-    .info h2 { font-size: 1.2em; }
-    .info p { font-size: 0.9em; }
-    .commands-container input { padding: 8px; font-size: 0.95em; }
-    .commands-container li { padding: 8px; font-size: 0.95em; }
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<canvas id="bgCanvas"></canvas>
-
+<div class="animated-bg"></div>
 <div class="container">
+
+    <!-- Buton minimalist Commands -->
     <div class="commands-btn" onclick="toggleCommands()">>_</div>
     
+    <!-- Titlu principal -->
     <h1>$mecherii</h1>
     <p>Download best script</p>
     
+    <!-- Card principal -->
     <div class="card">
         <div class="info">
             <h2>Velox Spammer v2</h2>
@@ -206,6 +28,7 @@ h1 {
         <a class="download-btn" href="https://drive.google.com/drive/folders/1ydxdnz4g2ere5eTOxP6DunslEbaXJ4EM?usp=drive_link" target="_blank">Download</a>
     </div>
 
+    <!-- Commands container -->
     <div class="commands-container" id="commandsContainer">
         <input type="text" id="searchInput" placeholder="Search commands..." onkeyup="filterCommands()">
         <ul id="commandsList">
@@ -225,93 +48,16 @@ h1 {
 </div>
 
 <script>
-// Toggle commands
 function toggleCommands() {
     const container = document.getElementById('commandsContainer');
     container.style.display = container.style.display === 'block' ? 'none' : 'block';
 }
 
-// Filter commands
 function filterCommands() {
     const input = document.getElementById('searchInput').value.toLowerCase();
     const commands = document.querySelectorAll('#commandsList li');
     commands.forEach(cmd => {
         cmd.style.display = cmd.textContent.toLowerCase().includes(input) ? 'block' : 'none';
-    });
-}
-
-// Only enable particle background on desktop
-if(window.innerWidth > 768){
-    const canvas = document.getElementById('bgCanvas');
-    const ctx = canvas.getContext('2d');
-    canvas.style.display = 'block';
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const particles = [];
-    const particleCount = 100;
-
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.radius = Math.random() * 3 + 1;
-            this.dx = (Math.random() - 0.5) * 1.2;
-            this.dy = (Math.random() - 0.5) * 1.2;
-            this.color = 'rgba(255,0,0,0.7)';
-        }
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = this.color;
-            ctx.shadowColor = '#ff0000';
-            ctx.shadowBlur = 8;
-            ctx.fill();
-            ctx.closePath();
-        }
-        update() {
-            this.x += this.dx;
-            this.y += this.dy;
-            if(this.x < 0 || this.x > canvas.width) this.dx = -this.dx;
-            if(this.y < 0 || this.y > canvas.height) this.dy = -this.dy;
-            this.draw();
-        }
-    }
-
-    for(let i=0; i<particleCount; i++) particles.push(new Particle());
-
-    function connectParticles() {
-        for(let a=0; a<particles.length; a++){
-            for(let b=a; b<particles.length; b++){
-                const dx = particles[a].x - particles[b].x;
-                const dy = particles[a].y - particles[b].y;
-                const distance = Math.sqrt(dx*dx + dy*dy);
-                if(distance < 120){
-                    ctx.beginPath();
-                    ctx.strokeStyle = `rgba(255,0,0,${1 - distance/120})`;
-                    ctx.lineWidth = 0.7;
-                    ctx.shadowBlur = 8;
-                    ctx.shadowColor = '#ff0000';
-                    ctx.moveTo(particles[a].x, particles[a].y);
-                    ctx.lineTo(particles[b].x, particles[b].y);
-                    ctx.stroke();
-                    ctx.closePath();
-                }
-            }
-        }
-    }
-
-    function animate() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        particles.forEach(p => p.update());
-        connectParticles();
-        requestAnimationFrame(animate);
-    }
-    animate();
-
-    window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
     });
 }
 </script>
