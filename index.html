@@ -6,7 +6,6 @@
 <title>smecherii</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins&display=swap" rel="stylesheet">
 <style>
-/* GENERAL */
 body {
     margin: 0;
     padding: 0;
@@ -18,10 +17,10 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
-    background: #0f0f0f;
+    background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
 }
 
-/* CANVAS BACKGROUND */
+/* Canvas doar pe desktop */
 #bgCanvas {
     position: fixed;
     top: 0;
@@ -29,6 +28,7 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: -2;
+    display: none; /* ascuns implicit */
 }
 
 /* Container principal */
@@ -51,7 +51,6 @@ body {
     text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000;
     margin-bottom: 20px;
     display: inline-block;
-
     background: #111;
     padding: 10px 25px;
     border-radius: 10px;
@@ -66,13 +65,19 @@ body {
     transform: scale(1.05);
 }
 
-/* Titlu neon roșu */
+/* Titlu neon roșu pulsant */
 h1 {
     font-family: 'Orbitron', sans-serif;
     font-size: 2.5em;
     color: #ff0000;
-    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000;
+    text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000;
     margin-bottom: 20px;
+    animation: neonPulse 1.8s infinite alternate;
+}
+
+@keyframes neonPulse {
+    0% { text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px #ff0000; }
+    100% { text-shadow: 0 0 15px #ff0000, 0 0 30px #ff0000, 0 0 50px #ff0000; }
 }
 
 /* Carduri */
@@ -169,8 +174,8 @@ h1 {
     box-shadow: 0 0 5px #ff0000;
 }
 
-/* Responsive mobil */
-@media screen and (max-width: 480px) {
+/* Responsive mobil/tablet */
+@media screen and (max-width: 768px) {
     h1 { font-size: 2em; }
     .commands-btn { font-size: 1.8em; padding: 8px 20px; }
     .card { padding: 12px; margin: 12px auto; }
@@ -186,14 +191,11 @@ h1 {
 <canvas id="bgCanvas"></canvas>
 
 <div class="container">
-    <!-- Buton minimalist Commands -->
     <div class="commands-btn" onclick="toggleCommands()">>_</div>
     
-    <!-- Titlu principal -->
     <h1>$mecherii</h1>
     <p>Download best script</p>
     
-    <!-- Card principal -->
     <div class="card">
         <div class="info">
             <h2>Velox Spammer v2</h2>
@@ -204,7 +206,6 @@ h1 {
         <a class="download-btn" href="https://drive.google.com/drive/folders/1ydxdnz4g2ere5eTOxP6DunslEbaXJ4EM?usp=drive_link" target="_blank">Download</a>
     </div>
 
-    <!-- Commands container -->
     <div class="commands-container" id="commandsContainer">
         <input type="text" id="searchInput" placeholder="Search commands..." onkeyup="filterCommands()">
         <ul id="commandsList">
@@ -239,77 +240,80 @@ function filterCommands() {
     });
 }
 
-// PARTICLE BACKGROUND
-const canvas = document.getElementById('bgCanvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// Only enable particle background on desktop
+if(window.innerWidth > 768){
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.style.display = 'block';
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-const particles = [];
-const particleCount = 120;
+    const particles = [];
+    const particleCount = 100;
 
-class Particle {
-    constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.radius = Math.random() * 3 + 1;
-        this.dx = (Math.random() - 0.5) * 1.5;
-        this.dy = (Math.random() - 0.5) * 1.5;
-        this.color = 'rgba(255,0,0,0.7)';
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.radius = Math.random() * 3 + 1;
+            this.dx = (Math.random() - 0.5) * 1.2;
+            this.dy = (Math.random() - 0.5) * 1.2;
+            this.color = 'rgba(255,0,0,0.7)';
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.shadowColor = '#ff0000';
+            ctx.shadowBlur = 8;
+            ctx.fill();
+            ctx.closePath();
+        }
+        update() {
+            this.x += this.dx;
+            this.y += this.dy;
+            if(this.x < 0 || this.x > canvas.width) this.dx = -this.dx;
+            if(this.y < 0 || this.y > canvas.height) this.dy = -this.dy;
+            this.draw();
+        }
     }
-    draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.shadowColor = '#ff0000';
-        ctx.shadowBlur = 10;
-        ctx.fill();
-        ctx.closePath();
-    }
-    update() {
-        this.x += this.dx;
-        this.y += this.dy;
-        if(this.x < 0 || this.x > canvas.width) this.dx = -this.dx;
-        if(this.y < 0 || this.y > canvas.height) this.dy = -this.dy;
-        this.draw();
-    }
-}
 
-for(let i=0; i<particleCount; i++) particles.push(new Particle());
+    for(let i=0; i<particleCount; i++) particles.push(new Particle());
 
-function connectParticles() {
-    for(let a=0; a<particles.length; a++) {
-        for(let b=a; b<particles.length; b++) {
-            const dx = particles[a].x - particles[b].x;
-            const dy = particles[a].y - particles[b].y;
-            const distance = Math.sqrt(dx*dx + dy*dy);
-            if(distance < 120) {
-                ctx.beginPath();
-                ctx.strokeStyle = `rgba(255,0,0,${1 - distance/120})`;
-                ctx.lineWidth = 0.7;
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = '#ff0000';
-                ctx.moveTo(particles[a].x, particles[a].y);
-                ctx.lineTo(particles[b].x, particles[b].y);
-                ctx.stroke();
-                ctx.closePath();
+    function connectParticles() {
+        for(let a=0; a<particles.length; a++){
+            for(let b=a; b<particles.length; b++){
+                const dx = particles[a].x - particles[b].x;
+                const dy = particles[a].y - particles[b].y;
+                const distance = Math.sqrt(dx*dx + dy*dy);
+                if(distance < 120){
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(255,0,0,${1 - distance/120})`;
+                    ctx.lineWidth = 0.7;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = '#ff0000';
+                    ctx.moveTo(particles[a].x, particles[a].y);
+                    ctx.lineTo(particles[b].x, particles[b].y);
+                    ctx.stroke();
+                    ctx.closePath();
+                }
             }
         }
     }
-}
 
-function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => p.update());
-    connectParticles();
-    requestAnimationFrame(animate);
-}
-animate();
+    function animate() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        particles.forEach(p => p.update());
+        connectParticles();
+        requestAnimationFrame(animate);
+    }
+    animate();
 
-window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-});
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+}
 </script>
 
 </body>
