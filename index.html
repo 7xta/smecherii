@@ -1,66 +1,364 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ro">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>smecherii</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smecherii — Panel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#0f1724; --bg2:#0b1020; --accent:#ff0055; --accent2:#00d4ff; --glass: rgba(255,255,255,0.06);
+      --card:#0b0f14; --glass-2: rgba(255,255,255,0.04);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial;color:#eef2ff;background:linear-gradient(160deg,var(--bg1),var(--bg2));-webkit-font-smoothing:antialiased}
+
+    /* --- Animated layered background (no boring basics) --- */
+    .bg-wrap{position:fixed;inset:0;z-index:-2;overflow:hidden}
+    .bg-gradient{position:absolute;inset:-20%;background:conic-gradient(from 180deg at 50% 50%, rgba(255,0,85,0.12), rgba(0,212,255,0.1), rgba(255,215,0,0.08), rgba(0,255,150,0.08));filter:blur(60px);mix-blend-mode:screen;animation:rotate 22s linear infinite}
+    .bg-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.02) 1px,transparent 1px);background-size:40px 40px;opacity:0.25;transform:translateZ(0);animation:pan 40s linear infinite}
+
+    .blob{position:absolute;border-radius:50%;filter:blur(28px);opacity:0.8;mix-blend-mode:screen;animation:float 12s ease-in-out infinite}
+    .blob.one{width:540px;height:540px;left:-8%;top:-10%;background:linear-gradient(45deg,var(--accent),#ff9ab8);animation-duration:18s}
+    .blob.two{width:420px;height:420px;right:-6%;bottom:-5%;background:linear-gradient(45deg,var(--accent2),#7effd4);animation-duration:16s;animation-delay:3s}
+    .blob.three{width:300px;height:300px;left:20%;bottom:-10%;background:linear-gradient(45deg,#ffce00,#ff7a00);animation-duration:20s;opacity:0.7}
+
+    @keyframes rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    @keyframes pan{0%{background-position:0 0}100%{background-position:1000px 1000px}}
+    @keyframes float{0%{transform:translateY(0) translateX(0)}50%{transform:translateY(-30px) translateX(18px)}100%{transform:translateY(0) translateX(0)}}
+
+    /* sparks particles */
+    .particle{position:absolute;width:6px;height:6px;border-radius:50%;opacity:0.9;filter:blur(1px);mix-blend-mode:screen}
+
+    /* --- Main layout --- */
+    .wrap{position:relative;max-width:1100px;margin:48px auto;padding:30px;display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start}
+
+    /* left big card */
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:16px;padding:28px;border:1px solid rgba(255,255,255,0.04);backdrop-filter: blur(8px);box-shadow: 0 8px 30px rgba(2,6,23,0.6)}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-family:Orbitron;font-size:20px;box-shadow:0 6px 30px rgba(255,0,85,0.2)}
+    h1.title{margin:0;font-size:26px;color:linear-gradient(90deg,var(--accent),var(--accent2));letter-spacing:0.6px}
+    p.lead{margin:10px 0 20px;color:rgba(230,240,255,0.9)}
+
+    .hero{display:grid;grid-template-columns:1fr 220px;gap:18px;margin-top:8px}
+    .hero .card{background:linear-gradient(180deg,var(--card),#071021);padding:18px;border-radius:12px;border:1px solid var(--glass-2);}
+    .hero .card h3{margin:0;font-size:16px;color:#fff}
+    .hero .card p{margin:6px 0 0;color:rgba(255,255,255,0.7);font-size:13px}
+
+    .commands{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,rgba(255,255,255,0.03),transparent);border:1px solid rgba(255,255,255,0.03);cursor:pointer;color:#fff;font-weight:600;text-decoration:none}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#ff7aa0);box-shadow:0 6px 20px rgba(255,0,85,0.16)}
+    .btn.ghost{background:transparent}
+
+    /* right sidebar */
+    .sidebar{position:sticky;top:36px}
+    .card.small{padding:16px}
+    .input{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff}
+    .list{margin-top:12px}
+    .list li{padding:8px;border-radius:8px;background:rgba(255,255,255,0.02);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+
+    /* admin panel (only visible to admin account) */
+    .admin-panel{margin-top:18px;padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px dashed rgba(255,255,255,0.03)}
+    .switch{display:inline-flex;align-items:center;gap:10px}
+
+    /* login modal */
+    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(0deg, rgba(2,6,23,0.6), rgba(2,6,23,0.75));z-index:40}
+    .modal-box{width:420px;background:linear-gradient(180deg,#061021, #071629);border-radius:14px;padding:20px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 20px 60px rgba(2,6,23,0.7)}
+    .field{margin-top:12px}
+    .muted{color:rgba(255,255,255,0.6);font-size:13px}
+    .small{font-size:13px}
+
+    /* footer */
+    .footer{margin-top:22px;color:rgba(255,255,255,0.6);font-size:13px}
+
+    /* responsive */
+    @media (max-width:980px){.wrap{grid-template-columns:1fr;padding:20px}.hero{grid-template-columns:1fr}.sidebar{position:relative;top:unset}}
+  </style>
 </head>
 <body>
-<div class="animated-bg"></div>
-<div class="container">
+  <div class="bg-wrap" aria-hidden>
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+    <div class="blob three"></div>
+    <!-- random particles created by JS -->
+  </div>
 
-    <!-- Buton minimalist Commands -->
-    <div class="commands-btn" onclick="toggleCommands()">>_</div>
-    
-    <!-- Titlu principal -->
-    <h1>$mecherii</h1>
-    <p>Download best script</p>
-    
-    <!-- Card principal -->
-    <div class="card">
-        <div class="info">
-            <h2>Velox Spammer v2</h2>
-            <p>Version 3.11 - added: startfile delay</p>
-            <p class="developers">Developers: Velox&LyS s1f</p>
-            <p class="tester">Tester: s3b11</p>
+  <div class="wrap">
+    <div class="panel">
+      <div class="brand">
+        <div class="logo">$M</div>
+        <div>
+          <h1 class="title">$mecherii — Control Panel</h1>
+          <div class="muted">Interfață modernă, animată, cu panou administrativ — demo local (fără backend)</div>
         </div>
-        <a class="download-btn" href="https://drive.google.com/drive/folders/1ydxdnz4g2ere5eTOxP6DunslEbaXJ4EM?usp=drive_link" target="_blank">Download</a>
+      </div>
+
+      <p class="lead">Folosește panoul pentru a administra blacklist, protecție anti-DDoS simulat, crearea de coduri de acces și gestionarea conturilor. Toate datele rămân local (LocalStorage).</p>
+
+      <div class="hero">
+        <div class="card">
+          <h3>Ce poți face</h3>
+          <p class="muted">- Generare chei de acces (invite keys) — copiază și trimite utilizatorilor.<br>- Creare conturi cu cheie validă.<br>- Panou admin pentru blacklist, banare, toggle anti-DDoS.<br>- Interfață colorată, responsive.</p>
+
+          <div class="commands">
+            <button class="btn primary" id="openRegister">Creează cont</button>
+            <button class="btn" id="openLogin">Logare</button>
+            <button class="btn" id="openAdmin">Deschide Panou Admin</button>
+            <button class="btn" id="showUsers">Vezi utilizatori</button>
+          </div>
+
+          <div class="list" id="statusList" style="margin-top:14px"></div>
+        </div>
+
+        <div class="card small">
+          <h3>Status sistem</h3>
+          <p class="muted" id="sysStatus">Inactiv</p>
+          <div style="margin-top:12px">
+            <label class="muted small">Căutare utilizator</label>
+            <input class="input" id="searchUser" placeholder="nume sau email...">
+          </div>
+        </div>
+      </div>
+
+      <div class="commands" style="margin-top:18px">
+        <div class="muted small">Descarcă script:</div>
+        <a class="btn ghost" href="#">Velox Spammer v2 (demo)</a>
+      </div>
+
+      <div class="footer">Notă: acesta este un demo frontend. Pentru funcționalitate reală trebuie backend, baze de date și autentificare sigură.</div>
     </div>
 
-    <!-- Commands container -->
-    <div class="commands-container" id="commandsContainer">
-        <input type="text" id="searchInput" placeholder="Search commands..." onkeyup="filterCommands()">
-        <ul id="commandsList">
-            <li>uptime</li>
-            <li>av</li>
-            <li>serverbanner</li>
-            <li>iplookup</li>
-            <li>serverav</li>
-            <li>stream</li>
-            <li>stopstream</li>
-            <li>massreact</li>
-            <li>react</li>
-            <li>delay</li>
-            <li>startfile</li>
-        </ul>
+    <aside class="sidebar">
+      <div class="card small">
+        <h3>Panou rapid</h3>
+        <p class="muted">Chei active: <strong id="keyCount">0</strong></p>
+        <p class="muted">Conturi: <strong id="acctCount">0</strong></p>
+        <div style="margin-top:12px">
+          <input id="quickKey" class="input" placeholder="introdu cheie pentru verificare" />
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="btn" id="checkKeyBtn">Verifică cheie</button>
+            <button class="btn" id="copySample">Exemplu cheie</button>
+          </div>
+        </div>
+
+        <div id="adminPanelHolder"></div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- modal: register / login / admin -->
+  <div class="modal" id="modal" style="display:none">
+    <div class="modal-box" role="dialog" aria-modal="true">
+      <div id="modalContent"></div>
+      <div style="display:flex;justify-content:flex-end;margin-top:14px;gap:8px">
+        <button class="btn" id="closeModal">Închide</button>
+      </div>
     </div>
-</div>
+  </div>
 
-<script>
-function toggleCommands() {
-    const container = document.getElementById('commandsContainer');
-    container.style.display = container.style.display === 'block' ? 'none' : 'block';
-}
+  <script>
+    /***** Utilities *****/
+    function qs(id){return document.getElementById(id)}
+    function randKey(len=16){const chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';let s='';for(let i=0;i<len;i++)s+=chars[Math.floor(Math.random()*chars.length)];return s}
+    function saveLS(k,v){localStorage.setItem(k,JSON.stringify(v))}
+    function loadLS(k,def){try{return JSON.parse(localStorage.getItem(k))||def}catch(e){return def}}
 
-function filterCommands() {
-    const input = document.getElementById('searchInput').value.toLowerCase();
-    const commands = document.querySelectorAll('#commandsList li');
-    commands.forEach(cmd => {
-        cmd.style.display = cmd.textContent.toLowerCase().includes(input) ? 'block' : 'none';
-    });
-}
-</script>
+    // init storage
+    let keys = loadLS('sm_keys', []); let users = loadLS('sm_users', []); let blacklist = loadLS('sm_blacklist', []);
+    let sys = loadLS('sm_sys', {antiDdos:false});
 
+    function renderCounts(){qs('keyCount').textContent = keys.length; qs('acctCount').textContent = users.length; qs('sysStatus').textContent = sys.antiDdos ? 'Anti-DDoS: ACTIV' : 'Anti-DDoS: INACTIV'}
+    renderCounts();
+
+    // particles
+    for(let i=0;i<28;i++){const p=document.createElement('div');p.className='particle';p.style.left=Math.random()*100+'%';p.style.top=Math.random()*100+'%';p.style.background=['#ff0055','#00d4ff','#ffd100'][Math.floor(Math.random()*3)];p.style.opacity=0.2+Math.random()*0.6;p.style.transform='scale('+ (0.5+Math.random()*1.4) +')';document.querySelector('.bg-wrap').appendChild(p)}
+
+    // modal helpers
+    function openModal(html){qs('modalContent').innerHTML = html; qs('modal').style.display='flex'}
+    function closeModal(){qs('modal').style.display='none'}
+    qs('closeModal').onclick=closeModal
+
+    // show status messages
+    function pushStatus(msg){const el=document.createElement('div');el.className='muted small';el.textContent=msg;const list=qs('statusList');list.prepend(el);if(list.children.length>5)list.removeChild(list.lastChild)}
+
+    // sample key
+    qs('copySample').addEventListener('click', ()=>{const s=randKey(20);navigator.clipboard.writeText(s);pushStatus('Exemplu cheie copiat: '+s)})
+
+    // check key
+    qs('checkKeyBtn').addEventListener('click', ()=>{const v=qs('quickKey').value.trim();if(!v){pushStatus('Introdu o cheie.');return}const ok = keys.includes(v);pushStatus(ok? 'Cheie validă.':'Cheie invalidă.')})
+
+    // open forms
+    qs('openRegister').addEventListener('click', ()=>{
+      openModal(renderRegister())
+    })
+    qs('openLogin').addEventListener('click', ()=>{openModal(renderLogin())})
+    qs('showUsers').addEventListener('click', ()=>{openModal(renderUsers())})
+
+    // admin button tries to open admin; if not admin, shows auth
+    qs('openAdmin').addEventListener('click', ()=>{
+      const cur = loadLS('sm_current', null);
+      if(cur && cur.isAdmin) openModal(renderAdmin()); else openModal(renderAdminAuth());
+    })
+
+    /***** Forms rendering *****/
+    function renderRegister(){
+      return `
+        <h3>Creare cont</h3>
+        <div class="field"><label class="small">Nume</label><input id="r_name" class="input" placeholder="nume utilizator" /></div>
+        <div class="field"><label class="small">Parolă</label><input id="r_pass" type="password" class="input" placeholder="parolă" /></div>
+        <div class="field"><label class="small">Cheie acces</label><input id="r_key" class="input" placeholder="introdu cheie generată" /></div>
+        <div style="display:flex;gap:8px;margin-top:12px"><button class="btn primary" id="doRegister">Creează</button><button class="btn" id="genLocalKey">Gen cheie local (pt demo)</button></div>
+      `
+    }
+    function renderLogin(){
+      return `
+        <h3>Autentificare</h3>
+        <div class="field"><label class="small">Nume</label><input id="l_name" class="input" placeholder="nume utilizator" /></div>
+        <div class="field"><label class="small">Parolă</label><input id="l_pass" type="password" class="input" placeholder="parolă" /></div>
+        <div style="display:flex;gap:8px;margin-top:12px"><button class="btn primary" id="doLogin">Loghează</button><button class="btn" id="logoutBtn">Deconectează</button></div>
+      `
+    }
+    function renderUsers(){
+      let html='<h3>Utilizatori</h3><div class="muted small">Lista conturilor (local)</div><ul style="margin-top:10px">'
+      if(users.length===0) html+='<li class="muted small">Niciun cont creat</li>';
+      users.forEach(u=>{html+=`<li style="margin:8px 0;padding:10px;border-radius:8px;background:rgba(255,255,255,0.02);display:flex;justify-content:space-between;align-items:center"><div><strong>${u.name}</strong><div class="muted small">admin: ${u.isAdmin? 'DA':'NU'}</div></div><div><button class="btn" data-ban="${u.name}">Ban</button></div></li>`})
+      html+='</ul>'
+      return html
+    }
+
+    function renderAdminAuth(){
+      return `
+        <h3>Autentificare Admin</h3>
+        <div class="field"><label class="small">Admin user</label><input id="a_name" class="input" placeholder="admin" value="admin" /></div>
+        <div class="field"><label class="small">Parolă admin</label><input id="a_pass" type="password" class="input" placeholder="admin123" value="admin123" /></div>
+        <div style="display:flex;gap:8px;margin-top:12px"><button class="btn primary" id="doAdminAuth">Autentificare</button></div>
+      `
+    }
+
+    function renderAdmin(){
+      return `
+        <h3>Panou Admin</h3>
+        <div class="muted small">Aici poți crea chei, vedea blacklist și gestiona conturi.</div>
+        <div style="margin-top:12px">
+          <label class="small">Generează cheie</label>
+          <div style="display:flex;gap:8px;margin-top:6px"><input id="newKeyLen" class="input" placeholder="lungime (ex:20)" /><button class="btn primary" id="genKeyBtn">Generează</button></div>
+        </div>
+        <div style="margin-top:12px">
+          <label class="small">Chei active</label>
+          <ul id="keysList" style="margin-top:8px"></ul>
+        </div>
+        <div style="margin-top:12px">
+          <label class="small">Blacklist</label>
+          <ul id="blList" style="margin-top:8px"></ul>
+          <div style="display:flex;gap:8px;margin-top:8px"><input id="bl_add" class="input" placeholder="user to blacklist" /><button class="btn" id="addBl">Adaugă</button></div>
+        </div>
+        <div style="margin-top:12px">
+          <label class="small">Setări sisteme</label>
+          <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between"><div class="muted small">Anti-DDoS (simulat)</div><div><button class="btn" id="toggleDdos">Toggle</button></div></div>
+        </div>
+      `
+    }
+
+    /***** Actions after modal content set (delegate) *****/
+    qs('modal').addEventListener('click', (e)=>{if(e.target===qs('modal')) closeModal()})
+    // delegate clicks inside modal
+    qs('modal').addEventListener('click', (e)=>{
+      const id = e.target.id;
+      if(id==='doRegister'){
+        const name=qs('r_name').value.trim(), pass=qs('r_pass').value, key=qs('r_key').value.trim();
+        if(!name||!pass||!key){pushStatus('Completează toate câmpurile.');return}
+        if(blacklist.includes(name)){pushStatus('Contul este blacklistat.');return}
+        if(!keys.includes(key)){pushStatus('Cheie invalidă.');return}
+        if(users.some(u=>u.name===name)){pushStatus('Nume deja folosit.');return}
+        // consume key (one-time)
+        keys = keys.filter(k=>k!==key); saveLS('sm_keys', keys);
+        users.push({name,pass,isAdmin:false, banned:false}); saveLS('sm_users', users);
+        saveLS('sm_keys', keys); saveLS('sm_users', users);
+        renderCounts(); pushStatus('Cont creat: '+name); closeModal();
+      }
+      if(id==='genLocalKey'){
+        const k=randKey(20); keys.push(k); saveLS('sm_keys', keys); renderCounts(); pushStatus('Cheie generată local: '+k)
+      }
+      if(id==='doLogin'){
+        const name=qs('l_name').value.trim(), pass=qs('l_pass').value;
+        const u = users.find(x=>x.name===name && x.pass===pass);
+        if(!u){pushStatus('Nume/parolă incorect.');return}
+        if(blacklist.includes(name) || u.banned){pushStatus('Accesul tău este restricționat.');return}
+        saveLS('sm_current', u); pushStatus('Autentificat: '+name); closeModal();
+      }
+      if(id==='logoutBtn'){localStorage.removeItem('sm_current');pushStatus('Deconectat');}
+      if(id==='doAdminAuth'){
+        // NOTE: this is a demo: default admin credentials are admin/admin123 OR any user with isAdmin true
+        const name=qs('a_name').value.trim(), pass=qs('a_pass').value.trim();
+        const cur = users.find(u=>u.name===name && u.pass===pass && u.isAdmin);
+        if((name==='admin' && pass==='admin123') || cur){
+          // sign in as admin
+          const adminObj = cur || {name:'admin',pass:'admin123',isAdmin:true};
+          saveLS('sm_current', adminObj); pushStatus('Autentificat ca admin: '+adminObj.name); closeModal();
+        } else { pushStatus('Credențiale admin invalide.'); }
+      }
+      if(id==='genKeyBtn'){
+        const len=parseInt(qs('newKeyLen').value)||20; const k=randKey(len); keys.push(k); saveLS('sm_keys', keys); renderCounts(); pushStatus('Cheie creată: '+k);
+        // re-render admin to show new key
+        qs('modalContent').innerHTML = renderAdmin(); populateAdminLists();
+      }
+      if(id==='addBl'){
+        const name=qs('bl_add').value.trim(); if(!name){pushStatus('Introdu nume.');return} blacklist.push(name); saveLS('sm_blacklist', blacklist); pushStatus('Adăugat în blacklist: '+name); populateAdminLists(); renderCounts();
+      }
+      if(id==='toggleDdos'){
+        sys.antiDdos = !sys.antiDdos; saveLS('sm_sys', sys); renderCounts(); pushStatus('Anti-DDoS: '+(sys.antiDdos?'ACTIV':'INACTIV')); qs('modalContent').innerHTML = renderAdmin(); populateAdminLists();
+      }
+    })
+
+    // Clicking Ban buttons inside Users modal
+    qs('modal').addEventListener('click', (e)=>{
+      if(e.target && e.target.dataset && e.target.dataset.ban){
+        const name = e.target.dataset.ban; const u = users.find(x=>x.name===name); if(u){u.banned=true; saveLS('sm_users', users); pushStatus('Utilizator banat: '+name);}
+      }
+    })
+
+    // When admin modal is rendered, populate lists and bind events
+    function populateAdminLists(){
+      const ul = qs('keysList'); if(!ul) return; ul.innerHTML=''; keys.slice().reverse().forEach(k=>{const li=document.createElement('li');li.style.padding='8px';li.style.marginBottom='8px';li.style.background='rgba(255,255,255,0.02)';li.style.borderRadius='8px';li.style.display='flex';li.style.justifyContent='space-between';li.innerHTML = `<span class="muted small" style="font-family:monospace">${k}</span><div style=\"display:flex;gap:8px\"><button class='btn' data-copy='${k}'>Copiază</button><button class='btn' data-rm='${k}'>Șterge</button></div>`; ul.appendChild(li)});
+      const bl = qs('blList'); bl.innerHTML=''; blacklist.forEach(b=>{const li=document.createElement('li');li.style.padding='8px';li.style.marginBottom='8px';li.style.background='rgba(255,255,255,0.02)';li.style.borderRadius='8px';li.innerHTML=`<div>${b}</div><div><button class='btn' data-unbl='${b}'>Șterge</button></div>`; bl.appendChild(li)});
+    }
+
+    // delegate copy/remove keys and un-blacklist
+    qs('modal').addEventListener('click', (e)=>{
+      if(e.target && e.target.dataset.copy){ const k=e.target.dataset.copy; navigator.clipboard.writeText(k); pushStatus('Cheie copiată: '+k); }
+      if(e.target && e.target.dataset.rm){ const k=e.target.dataset.rm; keys = keys.filter(x=>x!==k); saveLS('sm_keys', keys); pushStatus('Cheie ștearsă'); qs('modalContent').innerHTML = renderAdmin(); populateAdminLists(); renderCounts(); }
+      if(e.target && e.target.dataset.unbl){ const b=e.target.dataset.unbl; blacklist = blacklist.filter(x=>x!==b); saveLS('sm_blacklist', blacklist); pushStatus('Șters din blacklist: '+b); qs('modalContent').innerHTML = renderAdmin(); populateAdminLists(); }
+    })
+
+    // show admin panel in sidebar if current user is admin
+    function renderSidebarAdmin(){
+      const holder = qs('adminPanelHolder'); holder.innerHTML=''; const cur = loadLS('sm_current', null); if(cur && cur.isAdmin){
+        holder.innerHTML = `<div class='admin-panel'><div class='muted small'>PANEL ADMINISTATOR</div><div style='margin-top:8px;display:flex;gap:8px'><button class='btn primary' id='adminOpen'>Deschide Admin</button><button class='btn' id='adminLogout'>Delog Admin</button></div></div>`;
+        qs('adminOpen').onclick = ()=>{openModal(renderAdmin()); setTimeout(populateAdminLists,30)}
+        qs('adminLogout').onclick = ()=>{localStorage.removeItem('sm_current'); renderSidebarAdmin(); pushStatus('Admin deconectat')}
+      } else {
+        holder.innerHTML = '';
+      }
+    }
+    renderSidebarAdmin();
+
+    // Re-render counts periodically
+    setInterval(()=>{keys = loadLS('sm_keys',[]); users = loadLS('sm_users',[]); blacklist = loadLS('sm_blacklist',[]); sys = loadLS('sm_sys',{antiDdos:false}); renderCounts(); renderSidebarAdmin()}, 1500)
+
+    // Setup: if no users exist, create a default admin user (admin/admin123)
+    if(users.length===0){ users.push({name:'admin',pass:'admin123',isAdmin:true,banned:false}); saveLS('sm_users', users); pushStatus('Cont admin inițial creat: admin/admin123 (schimbă-l)'); renderCounts() }
+
+    // search user quick
+    qs('searchUser').addEventListener('keyup', (e)=>{const q=e.target.value.toLowerCase(); const res = users.filter(u => u.name.toLowerCase().includes(q)); qs('statusList').innerHTML=''; res.slice(0,6).forEach(u=>{const el=document.createElement('div');el.className='muted small';el.textContent = u.name + (u.isAdmin? ' (admin)':'') + (u.banned? ' [BANNED]':''); qs('statusList').appendChild(el)})})
+
+    // small UX: when modal content changes and admin is open, populate
+    const obs = new MutationObserver(()=>{ if(qs('keysList')) populateAdminLists() }); obs.observe(qs('modalContent'), {childList:true,subtree:true})
+
+    // small welcome
+    pushStatus('Interfață pregătită — folosește butoanele din dreapta sus.');
+
+  </script>
 </body>
 </html>
